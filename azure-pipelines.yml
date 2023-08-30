@@ -1,7 +1,3 @@
-After deploy Build stages, we would like to have paralleling running on DevStage and QAStage
-
-ProdStage would like to run after complete of DevStage and QAStage
-
 trigger:
 - master
 
