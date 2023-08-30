@@ -1,3 +1,7 @@
+After deploy Build stages, we would like to have paralleling running on DevStage and QAStage
+
+ProdStage would like to run after complete of DevStage and QAStage
+
 trigger:
 - master
 
@@ -13,6 +17,7 @@ stages:
       steps:
       - bash: echo Build Second Job
 - stage: DevDeploy
+  dependsOn: Build
   jobs:
     - job: DevFist
       steps:
@@ -21,11 +26,15 @@ stages:
       steps:
       - bash: echo Dev Second Job
 - stage: QADeploy
+  dependsOn: Build
   jobs:
     - job: QAJob
       steps:
       - bash: echo QA First Job
 - stage: ProdDeploy
+  dependsOn:
+  - DevDeploy
+  - QADeploy
   jobs:
     - job: ProductionsJob
       steps:
